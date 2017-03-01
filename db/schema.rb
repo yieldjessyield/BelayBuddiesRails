@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222221217) do
+ActiveRecord::Schema.define(version: 20170301160541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "climb_sessions", force: :cascade do |t|
+    t.integer  "host_id"
+    t.integer  "guest_id"
+    t.integer  "gym_id"
+    t.text     "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gyms", force: :cascade do |t|
+    t.string   "gym_name"
+    t.string   "phone_number"
+    t.string   "address"
+    t.string   "yelp_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "user_gyms", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "gym_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
